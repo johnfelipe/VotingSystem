@@ -12,3 +12,5 @@
 */
 
 Route::get('/', 'HomeController@StartApp');
+
+Route::resource('data', 'DataController');
