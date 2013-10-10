@@ -18,7 +18,9 @@ class CreateVotersTable extends Migration {
             $table->increments('id');
             $table->string('name')->unique();
             $table->unsignedInteger('mp_id');
+            $table->unsignedInteger('constituency_id');
             $table->foreign('mp_id')->references('id')->on('constituencies');
+            $table->foreign('constituency_id')->references('id')->on('constituencies');
             $table->boolean('voting')->default(false);
             $table->timestamps();
         });

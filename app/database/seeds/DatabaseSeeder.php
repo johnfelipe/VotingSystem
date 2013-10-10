@@ -11,8 +11,18 @@ class DatabaseSeeder extends Seeder {
 	{
 		Eloquent::unguard();
 		$this->call('ConstituenciesTableSeeder');
+		$this->call('VotersTableSeeder');
 	}
 
+}
+
+class VotersTableSeeder extends Seeder {
+
+    public function run()
+    {
+        DB::table('voters')->delete();
+        Voter::create(array('name'=>'Steven Hughes', 'mp_id'=>42, 'constituency_id'=>25, 'voting'=>true));
+    }
 }
 
 class ConstituenciesTableSeeder extends Seeder {

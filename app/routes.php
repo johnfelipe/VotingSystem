@@ -12,5 +12,9 @@
 */
 
 Route::get('/', 'HomeController@StartApp');
+Route::controller('data', 'DataController');
 
-Route::resource('data', 'DataController');
+// Catch all 
+Route::any('{all}', function() {
+    return Redirect::to('/');
+})->where('all', '.*');

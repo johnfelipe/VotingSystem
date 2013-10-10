@@ -1,4 +1,4 @@
-var APP = APP || {};
+var app = app || {};
 
 require.config({
 	paths: {
@@ -20,38 +20,56 @@ require([
     'jquery',
     'backbone',
     'collections/constituency_c',
+    'models/voter_m',
+    'views/start_v',
+    'views/vote_v',
+    'routers/router',
     'bootstrap'
 ], function(
     $,
     Backbone,
-    ConstituencyCollection
+    ConstituencyCollection,
+    VoterModel,
+    StartView,
+    VoteView,
+    Router
 ) {
-    APP.collections = {
+    app.collections = {
         constituencies : new ConstituencyCollection()
     }
     
-    APP.collections.constituencies.fetch({reset : true});
+    app.voter = new VoterModel();
+   
     
-    APP.collections.constituencies.on('reset', function() {
-        console.log(APP.collections.constituencies.toJSON());
+    app.collections.constituencies.on('reset', function() {
+        console.log(app.collections.constituencies.toJSON());
     })
     
-    APP.areas = {
+    app.areas = {
         siteselect : $('#site-select'),
     }
 
-    APP.pages = {
-        // Site selection
-        siteselect : $('#site-select-page').hide(),
+    app.pages = {
+        start : $('#start'),
+        vote : $('#vote').hide(),
+        dont_vote : $('#dont_vote').hide()
     }
     
-    APP.showPages = function(pages) { // an array
-        for(page in APP.pages) {
-            if(pages.indexOf(page) != -1) APP.pages[page].show();
-            else APP.pages[page].hide();
+    app.showPages = function(pages) { // an array
+        for(page in app.pages) {
+            if(pages.indexOf(page) != -1) app.pages[page].show();
+            else app.pages[page].hide();
         }
     }
     
-    APP.views = {
+    app.views = {
+        start : new StartView(),
+        vote : new VoteView(),
     }
+    
+    app.router = new Router();
+    Backbone.history.start({
+        pushState : true,
+        root : '/'
+    });
 });

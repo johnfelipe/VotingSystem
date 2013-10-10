@@ -1,12 +1,15 @@
-var APP = APP || {};
+var app = app || {};
 
 define([
-    'backbone'
+    'backbone',
+    'models/constituency_m'
 ], function(
-    Backbone
+    Backbone,
+    Constituency
 ) {
     var ConstituencyCollection = Backbone.Collection.extend({
-        'url' : '/data'
+        model : Constituency,
+        url : '/data'
     });
     return ConstituencyCollection;
 });
