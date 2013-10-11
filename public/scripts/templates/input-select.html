@@ -1,11 +1,10 @@
 
-<label for="<%= model.name %>"><%= model.label %></label> 
+<label class="control-label" for="<%= model.name %>"><%= model.label %></label> 
 <select name="<%= model.name %>" id="<%= model.name %>_control" class="form-control input-sm">
     <% 
         var options = model.options.models; 
         if(options.length) {
             _.each(options, function(option){
-        console.log(option);
     %>
     <option value="<%= option.id %>"><%= option.get(model.selectedAttribute) %></option>
     <% 

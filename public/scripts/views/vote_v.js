@@ -16,6 +16,11 @@ define([
         subTemplates: new Array(),
         template : _.template(VoteTemplate),
         initialize : function() {
+            this.listenTo(app.voter, 'invalid', function(model, error) {
+                var name = $('#voter_name');
+                name.addClass('has-error').find('span.help-block').text(error);
+            });
+            
             this.subTemplates.push(
                 new InputSelectView(
                     {model : new InputSelectModel ({
@@ -30,11 +35,11 @@ define([
             this.subTemplates.push(
                 new InputSelectView(
                     {model : new InputSelectModel ({
-                        name : 'mps',
+                        name : 'party',
                         label : 'Who are you going to vote for?',
-                        options : app.collections.constituencies,
-                        selectedAttribute : 'mp_name',
-                        loadingMessage : 'Loading MP data ...'
+                        options : app.collections.political_parties,
+                        selectedAttribute : 'name',
+                        loadingMessage : 'Loading Political party data ...'
                     })}
                 )
             );
@@ -43,10 +48,20 @@ define([
         events : {
             'click #cast_vote' : function(e) {
                 e.preventDefault();
-                app.voter.set({name : this.$el.find('#voter_name_control').val()});
-                app.voter.save();
+                app.voter.save({
+                    name : this.$el.find('#voter_name_control').val(),
+                    constituency_id : this.$el.find('#constituencies_control').val(),
+                    party_id : this.$el.find('#party_control').val()
+                });
+                
+                if(app.voter.isValid()) {
+                    app.showPages(['results']);
+                    app.collections.partyresults.fetch({reset : true});
+                    app.collections.constituencyresults.fetch({reset : true});
+                }
             }
         },
+        
         render : function() {
             this.$el.append(this.template())       
             

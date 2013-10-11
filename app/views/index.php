@@ -19,6 +19,7 @@ This sample voting application was developed by Steven Hughes using BackboneJS, 
                 <!-- load start up view into here to kick off the app -->
                 <div id="start"></div>
                 <div id="vote"></div>
+                <div id="results"></div>
                 <div id="dont_vote" class="container">
                     <h2>We're sorry to hear you're not voting</h2>
                     <p>Please come back again if you change your mind!</p>

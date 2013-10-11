@@ -14,3 +14,12 @@ form {
 footer {
     margin-top:20px;
 }
+
+table.table-bordered ul li {
+    padding:10px 0;
+    margin-bottom:5px;
+}
+
+div#dont_vote {
+    display:none;
+}

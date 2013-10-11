@@ -18,7 +18,7 @@ define([
         template : _.template(InputSelectTemplate),
         initialize : function() {
             this.render();
-            this.listenTo(app.collections.constituencies, 'reset', this.render);
+            this.listenTo(this.model.get('options'), 'reset', this.render);
         },
         render : function() {
             this.$el.html(this.template({model : this.model.toJSON()}));

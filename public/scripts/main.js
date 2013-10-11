@@ -20,39 +20,44 @@ require([
     'jquery',
     'backbone',
     'collections/constituency_c',
+    'collections/politicalparty_c',
+    'collections/partyelectionresult_c',
+    'collections/constituencyelectionresult_c',
     'models/voter_m',
     'views/start_v',
     'views/vote_v',
+    'views/partyelectionresults_v',
+    'views/constituencyelectionresults_v',
     'routers/router',
     'bootstrap'
 ], function(
     $,
     Backbone,
     ConstituencyCollection,
+    PoliticalPartyCollection,
+    PartyElectionResultCollection,
+    ConstituencyElectionResultCollection,
     VoterModel,
     StartView,
     VoteView,
+    PartyElectionResultsView,
+    ConstituencyElectionResultsView,
     Router
 ) {
     app.collections = {
-        constituencies : new ConstituencyCollection()
+        constituencies : new ConstituencyCollection(),
+        political_parties : new PoliticalPartyCollection(),
+        partyresults: new PartyElectionResultCollection(),
+        constituencyresults: new ConstituencyElectionResultCollection()
     }
     
     app.voter = new VoterModel();
-   
     
-    app.collections.constituencies.on('reset', function() {
-        console.log(app.collections.constituencies.toJSON());
-    })
-    
-    app.areas = {
-        siteselect : $('#site-select'),
-    }
-
     app.pages = {
         start : $('#start'),
         vote : $('#vote').hide(),
-        dont_vote : $('#dont_vote').hide()
+        dont_vote : $('#dont_vote').hide(),
+        results : $('#results').hide()
     }
     
     app.showPages = function(pages) { // an array
@@ -65,6 +70,8 @@ require([
     app.views = {
         start : new StartView(),
         vote : new VoteView(),
+        partyresults : new PartyElectionResultsView(),
+        constituencyresults : new ConstituencyElectionResultsView()
     }
     
     app.router = new Router();

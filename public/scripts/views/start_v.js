@@ -24,6 +24,7 @@ define([
             e.preventDefault();
             app.router.navigate('vote', {trigger : true});
             app.collections.constituencies.fetch({reset : true});
+            app.collections.political_parties.fetch({reset : true});
         },
         DontVoteView : function(e) {
             e.preventDefault();

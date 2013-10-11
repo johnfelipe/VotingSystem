@@ -9,7 +9,7 @@ define([
 ) {
     var ConstituencyCollection = Backbone.Collection.extend({
         model : Constituency,
-        url : '/data'
+        url : '/data/constituencies'
     });
     return ConstituencyCollection;
 });

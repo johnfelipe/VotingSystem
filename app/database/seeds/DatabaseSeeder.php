@@ -11,17 +11,160 @@ class DatabaseSeeder extends Seeder {
 	{
 		Eloquent::unguard();
 		$this->call('ConstituenciesTableSeeder');
-		$this->call('VotersTableSeeder');
+        $this->call('PoliticalPartySeeder');
+        $this->call('VotersTableSeeder');
 	}
 
 }
+class PoliticalPartySeeder extends Seeder {
+    public function run()
+    {
+        DB::table('political_parties')->delete();
+        PoliticalParty::create(array('name'=>'Alliance Party of Northern Ireland'));
+        PoliticalParty::create(array('name'=>'British National Party'));
+        PoliticalParty::create(array('name'=>'Conservative and Unionist Party'));
+        PoliticalParty::create(array('name'=>'Democratic Unionist Party'));
+        PoliticalParty::create(array('name'=>'Green Party in Northern Ireland'));
+        PoliticalParty::create(array('name'=>'Green Party of England and Wales'));
+        PoliticalParty::create(array('name'=>'Labour Party'));
+        PoliticalParty::create(array('name'=>'Liberal Democrats'));
+        PoliticalParty::create(array('name'=>'Plaid Cymru - Party of Wales'));
+        PoliticalParty::create(array('name'=>'Respect Party'));
+        PoliticalParty::create(array('name'=>'Scottish Green Party'));
+        PoliticalParty::create(array('name'=>'Scottish National Party'));
+        PoliticalParty::create(array('name'=>'Social Democratic and Labour Party'));
+        PoliticalParty::create(array('name'=>'Traditional Unionist Voice'));
+        PoliticalParty::create(array('name'=>'UK Independence Party'));
+        PoliticalParty::create(array('name'=>'Ulster Unionist Party'));
+        PoliticalParty::create(array('name'=>'Sinn Féin'));
+    }
+}
+
 
 class VotersTableSeeder extends Seeder {
 
     public function run()
     {
         DB::table('voters')->delete();
-        Voter::create(array('name'=>'Steven Hughes', 'mp_id'=>42, 'constituency_id'=>25, 'voting'=>true));
+        
+        // generate some random users
+        $users = array(
+            'Max Bendickson',
+            'Hermina Boyce',
+            'Donella Stith',
+            'Deborah Steinbach',
+            'Elbert Harp',
+            'Jerlene Horan',
+            'Dinorah Matranga',
+            'Pat Gaal',
+            'Barton Weidler',
+            'Dona Waggener',
+            'Jesus Jacquez',
+            'Elza Schiller',
+            'Fredric Eller',
+            'Mireille Klemm',
+            'Arcelia Hammes',
+            'Arlyne Yingling',
+            'Deadra Behr',
+            'Corinna Standard',
+            'Marleen Trujillo',
+            'Alina Grout',
+            'Clint Kirchoff',
+            'Everette Sickles',
+            'Vincenzo Rohn',
+            'Cathi Bohn',
+            'Antonina Lew',
+            'Felica Sweeney',
+            'Davina Cruce',
+            'Domenica Cappel',
+            'Hassie Guillaume',
+            'Kelvin Roane',
+            'Hiroko Viola',
+            'Desiree Estevez',
+            'Edwardo Fey',
+            'Cristen Quirion',
+            'Angeles Tamura',
+            'Marquitta Collette',
+            'Rosalia Ealey',
+            'Coralie Boswell',
+            'Norah Breuer',
+            'Keitha Lillibridge',
+            'Kattie Nelsen',
+            'Chasity Dietrick',
+            'Franchesca Purtee',
+            'Hester Gilman',
+            'Olin Bonn',
+            'Eldridge Kratochvil',
+            'Bruna Petti',
+            'Librada Tellis',
+            'Gwendolyn Frasure',
+            'Toshiko Wachter',
+            'Kiesha Heras',
+            'Cordia Oiler',
+            'Demarcus Gervasi',
+            'Alvera Worden',
+            'Golden Ference',
+            'Nakita Mader',
+            'Portia Bing',
+            'Deloise Saraiva',
+            'Oneida Oshields',
+            'Milton Emrick',
+            'Mina Stanwood',
+            'Dorcas Infantino',
+            'Ardelia Goodson',
+            'Ja Feagins',
+            'Karyl Kearns',
+            'Darline Roles',
+            'Sharron Daulton',
+            'Kali Arrigo',
+            'Shara Traub',
+            'Jonie Condon',
+            'Cassie Laura',
+            'Ignacio Woolum',
+            'Benny Anton',
+            'Clifton Lachapelle',
+            'Guillermina Hoos',
+            'Margaret Tavera',
+            'Pauline Moodie',
+            'Juliette Marcinko',
+            'Saran Toal',
+            'Tomas Kleinschmidt',
+            'Elma Bogner',
+            'Leigh Washinton',
+            'Natasha Matlock',
+            'Barry Leonetti',
+            'Zack Ponder',
+            'Shoshana Paavola',
+            'Silvia Weese',
+            'Todd Schwenk',
+            'Dorothea Kinchen',
+            'Lincoln Merrigan',
+            'Lora Depaz',
+            'Lavern Kluge',
+            'Suzette Champagne',
+            'Brandi Hebron',
+            'Katherina Hovis',
+            'Maile Charlie',
+            'Trent Brett',
+            'Lashaun Slavens',
+            'Kandice Le',
+            'Genaro Baver'
+        );
+        
+        // weed out possible duplicates
+        array_filter($users);
+        
+        // get seeding!
+        foreach($users as $name) {
+            Voter::create(
+                array(
+                    'name'=>$name,
+                    'party_id'=>rand(1, 17),
+                    'constituency_id'=>rand(1, 650),
+                    'voting'=>true
+                )
+            );
+        }  
     }
 }
 

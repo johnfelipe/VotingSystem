@@ -1,0 +1,25 @@
+<h2>User Results by Constituency</h2>
+<table class="table table-striped table-bordered">
+    <tr>
+        <th>Constituency</th>
+        <th>Party Name (Number of votes)</th>
+    </tr>
+    <% 
+       _.each(results, function(result){ 
+    %>
+    <tr>
+        <td><%= result.constituency %></td> 
+        <td>
+            <ul class="list-unstyled">
+            <% 
+               _.each(result.parties, function(party){
+            %>
+                <li><%= (party.party) ? party.party : 'No Votes Recorded' %> <strong>(<%= party.votes %>)</strong></li>
+            <%
+               })   
+            %>
+            </ul>
+        </td>
+    </tr>
+    <%  })  %>
+</table>
