@@ -52,8 +52,6 @@ NameVirtualHost *:80
 
 You'll notice that the DocumentRoot is set to the 'public' folder and not the applications root directory.
 
-Once the above steps are complete, resart apache (sudo apachectl restart)
+7.	Once the above steps are complete, resart apache (sudo apachectl restart)
 
-In your browser, go to, www.votingapp.co.uk and you should be greeted with my application
-
- 
+8.	In your browser, go to, www.votingapp.co.uk and you should be greeted with my application.
